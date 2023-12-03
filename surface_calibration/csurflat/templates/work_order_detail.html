@@ -1,0 +1,133 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <form method="POST" action={% url 'work_order_detail' wid=work_order_number %}>
+        {% csrf_token %}
+      <button
+        type="submit"
+        name="work_order_btn"
+        class="btn btn-outline-primary"
+        disabled
+      >
+        Work Order
+      </button>
+      <button type="submit" name="measurement_data_btn" class="btn btn-primary">
+        Measurement Data
+      </button>
+      <button type="submit" name="flatness_btn" class="btn btn-primary">
+        Flatness
+      </button>
+      <button type="submit" name="deviation_plot_btn" class="btn btn-primary">
+        Deviation Plot
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="container">
+  {% comment %} customer details {% endcomment %}
+  <div class="d-grid gap-3 mt-5">
+    <h4>Customer Details</h4>
+    <div class="row">
+      <div class="col">
+        <label for="customer">Customer: </label>
+        <input type="text" id="customer" name="customer" value="{{customer}}" />
+      </div>
+      <div class="col">
+        <label for="ref">Ref: </label>
+        <input type="text" id="ref" name="ref" value={% if ref%} "{{ref}}" {%
+        else %} "" {%endif%} >
+      </div>
+      <div class="col">
+        <label for="date">Date: </label>
+        <input type="text" id="date" name="date" value="{{date_created}}" />
+      </div>
+    </div>
+  </div>
+
+  {% comment %} surface plate details {% endcomment %}
+  <div class="d-grid gap-3 mt-5">
+    <h4>Surface Plate Details</h4>
+    <div class="row">
+      <div class="col">
+        <label for="surface_plate_id">Surface Plate ID: </label>
+        <input
+          type="text"
+          id="surface_plate_id"
+          name="surface_plate_id"
+          value="{{surface_plate_id}}"
+        />
+      </div>
+      <div class="col">
+        <label for="desc">Description: </label>
+        <input type="text" id="desc" name="desc" value="{{desc}}" />
+      </div>
+      <div class="col">
+        <label for="surface_plate_type">Model/Type: </label>
+        <input
+          type="text"
+          id="surface_plate_type"
+          name="surface_plate_type"
+          value="{{surface_plate_type}}"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="length">Length: </label>
+        <input type="text" id="length" name="length" value="{{length}}" /> nm
+      </div>
+      <div class="col">
+        <label for="width">Width: </label>
+        <input type="text" id="width" name="width" value="{{width}}" /> nm
+      </div>
+      <div class="col">
+        <label for="grade">Grade: </label>
+        <input type="text" id="grade" name="grade" value="{{grade}}" />
+      </div>
+    </div>
+  </div>
+  {% comment %} measurement details {% endcomment %}
+  <div class="d-grid gap-3 mt-5">
+    <h4>Measurement Details</h4>
+    <div class="row">
+      <div class="col">
+        <label for="num_rows">No. of Rows: </label>
+        <input type="text" id="num_rows" name="num_rows" value="{{num_rows}}" />
+      </div>
+      <div class="col">
+        <label for="num_cols">No. of Cols: </label>
+        <input type="text" id="num_cols" name="num_cols" value="{{num_cols}}" />
+      </div>
+      <div class="col">
+        <label for="bridge_length">Bridge Length: </label>
+        <input
+          type="text"
+          id="bridge_length"
+          name="bridge_length"
+          value="{{bridge_length}}"
+        />
+        mm
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="start_temp">Start Temp: </label>
+        <input
+          type="text"
+          id="start_temp"
+          name="start_temp"
+          value="{{start_temp}}"
+        />
+        Celsius
+      </div>
+      <div class="col">
+        <label for="end_temp">End Temp: </label>
+        <input type="text" id="end_temp" name="end_temp" value="{{end_temp}}" />
+        Celsius
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
